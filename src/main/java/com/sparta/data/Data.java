@@ -6,7 +6,7 @@ import java.util.List;
 public interface Data {
     List<String[]> getData();
     HashSet<String[]> cleanData(List<String[]> data);
-    void displayCleanData(HashSet<String[]> hashSetName);
+    void displayCleanData(HashSet<String[]> data);
     void printUncleanData(List<String[]> data);
 
 }

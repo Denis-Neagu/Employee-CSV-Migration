@@ -29,7 +29,7 @@ public class HandleData implements Data{
     }
 
     //Convert list of string arrays to hashset of string arrays to remove duplicates
-    @Override
+    @Override //ToDo add Employee class and in Employee class override hashset and comparable
     public HashSet<String[]> cleanData(List<String[]> data){
         HashSet<String[]> hashSetData = new HashSet<>();
         for(String[] s : data) {
@@ -39,8 +39,8 @@ public class HandleData implements Data{
     }
 
     @Override
-    public void displayCleanData(HashSet<String[]> hashSetName) {
-        for(String[] s : hashSetName) {
+    public void displayCleanData(HashSet<String[]> data) {
+        for(String[] s : data) {
             for(String value : s){
                 System.out.print(value + ",");
             }
