@@ -17,8 +17,8 @@ public class HandleData implements Data{
         List<String[]> stringArray = new ArrayList<>();
 
         try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
-            while ((line = in.readLine()) != null) {
-                dataArray = line.split(",");
+            while ((line = in.readLine()) != null) { //returns new line terminated by \n
+                dataArray = line.split(","); //stores split string from line and returns string array
                 stringArray.add(dataArray);
             }
             return stringArray;
