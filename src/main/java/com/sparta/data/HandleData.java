@@ -28,14 +28,24 @@ public class HandleData implements Data{
         return null;
     }
 
-    //Convert list of string arrays to hashset to remove duplicates
+    //Convert list of string arrays to hashset of string arrays to remove duplicates
     @Override
-    public HashSet<String> cleanData(List<String[]> data){
-        return null;
+    public HashSet<String[]> cleanData(List<String[]> data){
+        HashSet<String[]> hashSetData = new HashSet<>();
+        for(String[] s : data) {
+            hashSetData.add(s);
+        }
+        return hashSetData;
     }
 
     @Override
-    public void displayCleanData(HashSet<String> hashSetName) {
+    public void displayCleanData(HashSet<String[]> hashSetName) {
+        for(String[] s : hashSetName) {
+            for(String value : s){
+                System.out.print(value + ",");
+            }
+            System.out.println();
+        }
 
     }
 

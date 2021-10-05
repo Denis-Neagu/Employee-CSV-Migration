@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface Data {
     List<String[]> getData();
-    HashSet<String> cleanData(List<String[]> data);
-    void displayCleanData(HashSet<String> hashSetName);
+    HashSet<String[]> cleanData(List<String[]> data);
+    void displayCleanData(HashSet<String[]> hashSetName);
     void printUncleanData(List<String[]> data);
 
 }
