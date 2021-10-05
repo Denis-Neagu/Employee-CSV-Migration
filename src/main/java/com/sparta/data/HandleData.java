@@ -8,6 +8,7 @@ public class HandleData implements Data{
     //Read data from file and return it as an array
     @Override
     public String[] getData(String fileName) {
+
         return null;
     }
 
