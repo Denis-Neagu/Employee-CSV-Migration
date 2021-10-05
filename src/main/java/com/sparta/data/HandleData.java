@@ -3,6 +3,8 @@ package com.sparta.data;
 import java.util.HashSet;
 
 public class HandleData implements Data{
+    FileHandler fileHandler = new FileHandler();
+
     //Read data from file and return it as an array
     @Override
     public String[] getData(String fileName) {
