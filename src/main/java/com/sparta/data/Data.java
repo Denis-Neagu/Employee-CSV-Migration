@@ -1,9 +1,12 @@
 package com.sparta.data;
 
 import java.util.HashSet;
+import java.util.List;
 
 public interface Data {
-    String[] getData(String fileName);
-    HashSet<String> cleanData(String[] arrayName);
+    List<String[]> getData();
+    HashSet<String> cleanData(List<String[]> data);
     void displayCleanData(HashSet<String> hashSetName);
+    void printUncleanData(List<String[]> data);
+
 }
