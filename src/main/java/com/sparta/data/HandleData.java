@@ -8,7 +8,7 @@ import java.util.List;
 public class HandleData implements Data{
     FileHandler fileHandler = new FileHandler();
 
-    //Read data from file and return it as a list array
+    //Read data from file and return it as a list of string arrays
     @Override
     public List<String[]> getData() {
         String fileName = fileHandler.getFileName();
@@ -28,7 +28,7 @@ public class HandleData implements Data{
         return null;
     }
 
-    //Convert String array to Set to remove duplicates
+    //Convert list of string arrays to hashset to remove duplicates
     @Override
     public HashSet<String> cleanData(List<String[]> data){
         return null;
