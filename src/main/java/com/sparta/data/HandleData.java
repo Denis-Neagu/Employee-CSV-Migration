@@ -1,61 +1,43 @@
 package com.sparta.data;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class HandleData implements Data{
     FileHandler fileHandler = new FileHandler();
 
-    //Read data from file and return it as a list of string arrays
+    //Read data from file and return it as a collection of Employee
     @Override
-    public List<String[]> getData() {
+    public ArrayList<Employee> getUncleanDataAsEmployee() {
         String fileName = fileHandler.getFileName();
         String line = null;
         String[] dataArray = null;
-        List<String[]> stringArray = new ArrayList<>();
+        ArrayList<Employee> employeeList = new ArrayList<>();
+        Employee employee;
 
         try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
+            in.readLine(); //skip columns
+
             while ((line = in.readLine()) != null) { //returns new line terminated by \n
                 dataArray = line.split(","); //stores split string from line and returns string array
-                stringArray.add(dataArray);
+
+                Date date1 = new Date(dataArray[7]);
+                Date date2 = new Date(dataArray[8]);
+
+                java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
+                java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+
+                employee = new Employee(Integer.parseInt(dataArray[0]), dataArray[1], dataArray[2], dataArray[3].charAt(0), dataArray[4], dataArray[5].charAt(0), dataArray[6], sqlDate1, sqlDate2, Double.parseDouble(dataArray[9]));
+
+                employeeList.add(employee);
             }
-            return stringArray;
-        } catch (IOException e) {
+
+            return employeeList;
+
+        } catch (NumberFormatException | IOException e) {
             e.printStackTrace();
         }
+
         return null;
-    }
-
-    //Convert list of string arrays to hashset of string arrays to remove duplicates
-    @Override //ToDo add Employee class and in Employee class override hashset and comparable
-    public HashSet<String[]> cleanData(List<String[]> data){
-        HashSet<String[]> hashSetData = new HashSet<>();
-        for(String[] s : data) {
-            hashSetData.add(s);
-        }
-        return hashSetData;
-    }
-
-    @Override
-    public void displayCleanData(HashSet<String[]> data) {
-        for(String[] s : data) {
-            for(String value : s){
-                System.out.print(value + ",");
-            }
-            System.out.println();
-        }
-
-    }
-
-    @Override
-    public void printUncleanData(List<String[]> data) {
-        for (String[] s : data) {
-            for (String value : s) {
-                System.out.print(value + ",");
-            }
-            System.out.println();
-        }
     }
 }

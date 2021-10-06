@@ -12,10 +12,10 @@ public class Employee {
     private String email;
     private Date dateOfBirth;
     private Date dateOfJoining;
-    private int salary;
+    private double salary;
 
     public Employee(int employeeID, String namePrefix, String firstName, char middleInitial, String lastName,
-                    char gender, String email, Date dateOfBirth, Date dateOfJoining, int salary) {
+                    char gender, String email, Date dateOfBirth, Date dateOfJoining, double salary) {
         this.employeeID = employeeID;
         this.namePrefix = namePrefix;
         this.firstName = firstName;
@@ -100,11 +100,11 @@ public class Employee {
         this.dateOfJoining = dateOfJoining;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
