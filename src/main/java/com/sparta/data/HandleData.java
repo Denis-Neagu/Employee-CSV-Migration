@@ -40,4 +40,25 @@ public class HandleData implements Data{
 
         return null;
     }
+
+    //Map employee to employeeID
+    @Override
+    public Map<Integer,List<Employee>> mapEmployees(List<Employee> listOfEmployees) {
+        Map<Integer, List<Employee>> mapOfEmployees = new HashMap<>();
+
+        for (Employee employee : listOfEmployees) {
+            List<Employee> list = mapOfEmployees.get(employee.getEmployeeID());
+
+            if(list == null) {
+                list = new ArrayList<>();
+            }
+
+            list.add(employee);
+
+            mapOfEmployees.put(employee.getEmployeeID(), list);
+
+        }
+
+        return mapOfEmployees;
+    }
 }
