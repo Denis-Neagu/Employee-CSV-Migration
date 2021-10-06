@@ -61,4 +61,22 @@ public class HandleData implements Data{
 
         return mapOfEmployees;
     }
+
+    //Get/remove duplicated data and unique employees
+    @Override
+    public List<Employee> getEmployeeData(Map<Integer,List<Employee>> mapOfEmployees, int occurrence) {
+        List<Employee> listOfEmployees = new ArrayList<>();
+
+        for (Map.Entry<Integer,List<Employee>> entry : mapOfEmployees.entrySet()) {
+            if (entry.getValue().size() == occurrence) {
+                Employee tempEmployee = entry.getValue().get(0);
+
+                listOfEmployees.add(tempEmployee);
+
+                entry.getValue().remove(tempEmployee);
+            }
+        }
+
+        return listOfEmployees;
+    }
 }

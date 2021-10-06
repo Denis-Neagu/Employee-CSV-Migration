@@ -15,5 +15,8 @@ public class CSVMigration {
 
         Map<Integer, List<Employee>> mapOfEmployees = handleData.mapEmployees(listOfEmployees);
 
+        List<Employee> employeeDuplicates = handleData.getEmployeeData(mapOfEmployees, 2);
+
+        List<Employee> employeeCleanCollection = handleData.getEmployeeData(mapOfEmployees, 1);
     }
 }
