@@ -5,8 +5,8 @@ import java.sql.*;
 public class DatabaseController {
     Connection connection = Database.getConnection();
 
-    public void createTable() {
-        String createTable = "CREATE TABLE IF NOT EXISTS`csv_migration`.`employee` (\n" +
+    public void createTable(String tableName) {
+        String createTable = "CREATE TABLE IF NOT EXISTS "+"csv_migration."+tableName+"(\n" +
                 "  `EMP_ID` INT NOT NULL,\n" +
                 "  `NAME_PREFIX` VARCHAR(45) NULL,\n" +
                 "  `FIRST_NAME` VARCHAR(45) NULL,\n" +
@@ -23,10 +23,15 @@ public class DatabaseController {
             Statement statement = connection.createStatement();
             statement.executeUpdate(createTable);
 
-            System.out.println("TABLE CREATED");
+            System.out.println(tableName +" TABLE CREATED");
 
-            statement.close();
-            connection.close();
+            ResultSet rs = statement.executeQuery("SELECT * FROM "+tableName);
+
+            if (rs.next()) {
+                statement.close();
+                connection.close();
+            }
+
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }

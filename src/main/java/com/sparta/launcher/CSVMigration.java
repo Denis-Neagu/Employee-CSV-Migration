@@ -26,7 +26,9 @@ public class CSVMigration {
 
         //Create Table
         DatabaseController databaseController = new DatabaseController();
-        databaseController.createTable();
+        databaseController.createTable("employee_duplicates");
+        databaseController.createTable("employee_clean_data");
+
 
     }
 }
