@@ -79,4 +79,39 @@ public class HandleData implements Data{
 
         return listOfEmployees;
     }
+
+    //Create regex which returns true or false if data is fit for storage
+    @Override
+    public boolean isValid(List<Employee> employees) {
+        boolean valid = true;
+
+        if (employees.isEmpty()) {
+            valid = false;
+        }
+
+        for (Employee employee : employees) {
+            if (employee.getEmployeeID() < 0) {
+                valid = false;
+            } else if (!employee.getNamePrefix().matches("[a-zA-Z]+\\.")) {
+                valid = false;
+            } else if (!employee.getFirstName().matches("[a-zA-Z]+")) {
+                valid = false;
+            } else if ((String.valueOf(employee.getMiddleInitial()).length() > 1) || !String.valueOf(employee.getMiddleInitial()).matches("[A-Z]")) {
+                valid = false;
+            } else if (!employee.getLastName().matches("[a-zA-Z]+")) {
+                valid = false;
+            } else if ((String.valueOf(employee.getGender()).length() > 1) || !String.valueOf(employee.getGender()).matches("^M$|^F$|^M/F$")) {
+                valid = false;
+            } else if (!employee.getEmail().matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")) {
+                valid = false;
+            } else if (!(String.valueOf(employee.getDateOfBirth())).matches("^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")) {
+                valid = false;
+            } else if (!(String.valueOf(employee.getDateOfJoining())).matches("^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")) {
+                valid = false;
+            } else if (employee.getSalary() < 0) {
+                valid = false;
+            }
+        }
+        return valid;
+    }
 }
