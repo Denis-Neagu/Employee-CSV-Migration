@@ -27,11 +27,6 @@ public class DatabaseController {
 
             ResultSet rs = statement.executeQuery("SELECT * FROM "+tableName);
 
-            if (rs.next()) {
-                statement.close();
-                connection.close();
-            }
-
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
