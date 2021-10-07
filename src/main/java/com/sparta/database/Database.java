@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class Database {
     private static Database instance;
-    private Connection connection;
+    private static Connection connection;
 
     private Database() {
-        String dbURL = "jdbc:mysql://localhost:3306/csv_migration";
+        String dbURL = "jdbc:mysql://localhost:3306/csv_migration?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         String dbUsername = "root";
         String dbPassword = "rootpassword";
 
@@ -25,7 +25,7 @@ public class Database {
             instance = new Database();
         }
 
-        return instance.connection;
+        return connection;
     }
 
 

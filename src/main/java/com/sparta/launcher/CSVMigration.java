@@ -2,6 +2,8 @@ package com.sparta.launcher;
 
 import com.sparta.data.Employee;
 import com.sparta.data.HandleData;
+import com.sparta.database.DatabaseController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,5 +23,10 @@ public class CSVMigration {
 
         System.out.println("There are " + employeeDuplicates.size() + " duplicated rows to be removed because their employeeID is not unique");
         System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
+
+        //Create Table
+        DatabaseController databaseController = new DatabaseController();
+        databaseController.createTable();
+
     }
 }
