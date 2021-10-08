@@ -24,11 +24,16 @@ public class CSVMigration {
         System.out.println("There are " + employeeDuplicates.size() + " duplicated rows to be removed because their employeeID is not unique");
         System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
 
+        String employeeDuplicateTable = "employee_duplicates";
+        String employeeCleanDataTable = "employee_clean_data";
+
         //Create Table
         DatabaseController databaseController = new DatabaseController();
-        databaseController.createTable("employee_duplicates");
-        databaseController.createTable("employee_clean_data");
+        databaseController.createTable(employeeDuplicateTable);
+        databaseController.createTable(employeeCleanDataTable);
 
-
+        //Insert Into Tables
+        databaseController.insertEmployee(employeeDuplicates, employeeDuplicateTable);
+        databaseController.insertEmployee(employeeCleanCollection, employeeCleanDataTable);
     }
 }

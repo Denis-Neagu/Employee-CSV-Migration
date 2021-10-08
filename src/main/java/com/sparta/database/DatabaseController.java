@@ -1,10 +1,14 @@
 package com.sparta.database;
 
+import com.sparta.data.Employee;
+
 import java.sql.*;
+import java.util.List;
 
 public class DatabaseController {
     Connection connection = Database.getConnection();
 
+    //create table in database
     public void createTable(String tableName) {
         String createTable = "CREATE TABLE IF NOT EXISTS "+"csv_migration."+tableName+"(\n" +
                 "  `EMP_ID` INT NOT NULL,\n" +
@@ -23,11 +27,38 @@ public class DatabaseController {
             Statement statement = connection.createStatement();
             statement.executeUpdate(createTable);
 
-            System.out.println(tableName +" TABLE CREATED");
-
-            ResultSet rs = statement.executeQuery("SELECT * FROM "+tableName);
-
+            System.out.println(tableName +" TABLE IS IN csv_migration database");
         } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+    //insert each employee in tableName
+    public void insertEmployee(List<Employee> employees, String tableName) {
+        String insertIntoTable = "INSERT INTO "+"csv_migration."+tableName+"(`EMP_ID`, `NAME_PREFIX`, `FIRST_NAME`, `MIDDLE_INITIAL`, `LAST_NAME`, `GENDER`, `EMAIL`, `DATE_OF_BIRTH`, `DATE_OF_JOINING`, `SALARY`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insertIntoTable);
+            connection.setAutoCommit(false);
+
+            for (Employee employee : employees) {
+                preparedStatement.setInt(1, employee.getEmployeeID());
+                preparedStatement.setString(2, employee.getNamePrefix());
+                preparedStatement.setString(3, employee.getFirstName());
+                preparedStatement.setString(4, String.valueOf(employee.getMiddleInitial()));
+                preparedStatement.setString(5, employee.getLastName());
+                preparedStatement.setString(6, String.valueOf(employee.getGender()));
+                preparedStatement.setString(7, employee.getEmail());
+                preparedStatement.setDate(8, employee.getDateOfBirth());
+                preparedStatement.setDate(9, employee.getDateOfJoining());
+                preparedStatement.setDouble(10, employee.getSalary());
+
+                preparedStatement.execute();
+            }
+            connection.commit();
+
+            System.out.println(tableName + " data successfully stored");
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
