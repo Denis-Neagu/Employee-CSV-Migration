@@ -22,7 +22,7 @@ public class CSVMigration {
         List<Employee> employeeCleanCollection = handleData.getEmployeeData(mapOfEmployees, 1);
 
         System.out.println("There are " + employeeDuplicates.size() + " duplicated rows to be removed because their employeeID is not unique");
-        System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
+        System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.\n");
 
         String employeeDuplicateTable = "employee_duplicates";
         String employeeCleanDataTable = "employee_clean_data";

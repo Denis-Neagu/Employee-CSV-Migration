@@ -44,10 +44,10 @@ public class DatabaseController {
 
                 String queryCheck = "SELECT * from "+tableName+" WHERE EMP_ID = ?";
 
-                PreparedStatement preparedStatement1 = connection.prepareStatement(queryCheck);
-                preparedStatement1.setInt(1,employee.getEmployeeID());
+                PreparedStatement pStatementCheckIfEmployeeExists = connection.prepareStatement(queryCheck);
+                pStatementCheckIfEmployeeExists.setInt(1,employee.getEmployeeID());
 
-                ResultSet rs = preparedStatement1.executeQuery();
+                ResultSet rs = pStatementCheckIfEmployeeExists.executeQuery();
 
                 if(rs.next()) {
                     System.out.println(employee.getFirstName() + " " + employee.getLastName() + " Already exists in table " + tableName);
@@ -75,6 +75,4 @@ public class DatabaseController {
             e.printStackTrace();
         }
     }
-
-
 }
