@@ -8,7 +8,7 @@ import java.util.List;
 public class DatabaseController {
     Connection connection = Database.getConnection();
 
-    //create table in database
+    //Create table in database
     public void createTable(String tableName) {
         String createTable = "CREATE TABLE IF NOT EXISTS "+"csv_migration."+tableName+"(\n" +
                 "  `EMP_ID` INT NOT NULL,\n" +
@@ -32,7 +32,8 @@ public class DatabaseController {
             e.printStackTrace();
         }
     }
-    //insert each employee in tableName
+
+    //Insert each employee in tableName
     public void insertEmployee(List<Employee> employees, String tableName) {
         String insertIntoTable = "INSERT INTO "+"csv_migration."+tableName+"(`EMP_ID`, `NAME_PREFIX`, `FIRST_NAME`, `MIDDLE_INITIAL`, `LAST_NAME`, `GENDER`, `EMAIL`, `DATE_OF_BIRTH`, `DATE_OF_JOINING`, `SALARY`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -50,7 +51,7 @@ public class DatabaseController {
                 ResultSet rs = pStatementCheckIfEmployeeExists.executeQuery();
 
                 if(rs.next()) {
-                    System.out.println(employee.getFirstName() + " " + employee.getLastName() + " Already exists in table " + tableName);
+                    System.out.println(employee.getFirstName() + " " + employee.getLastName() + " already exists in table " + tableName);
                 } else {
                     preparedStatement.setInt(1, employee.getEmployeeID());
                     preparedStatement.setString(2, employee.getNamePrefix());
@@ -66,7 +67,6 @@ public class DatabaseController {
                     preparedStatement.execute();
 
                     System.out.println(employee.getFirstName() + " " + employee.getLastName() + " successfully stored in " + tableName);
-
                 }
             }
             connection.commit();
