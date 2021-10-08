@@ -27,7 +27,7 @@ public class DatabaseController {
             Statement statement = connection.createStatement();
             statement.executeUpdate(createTable);
 
-            System.out.println(tableName +" TABLE IS IN csv_migration database");
+            System.out.println(tableName +" TABLE IS IN csv_migration database\n");
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
