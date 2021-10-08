@@ -31,9 +31,6 @@ public class CSVMigration {
 
                 List<Employee> employeeCleanCollection = handleData.getEmployeeData(mapOfEmployees, 1); //Store the rest of the employees after removal in a List with only unique employeeID's
 
-                System.out.println("There are " + employeeDuplicates.size() + " duplicated rows to be removed because their employeeID is not unique");
-                System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.\n");
-
                 String employeeDuplicateTable = "employee_duplicates";
                 String employeeCleanDataTable = "employee_clean_data";
                 String mergeCleanTable = "merged_clean_table";
@@ -61,6 +58,11 @@ public class CSVMigration {
                 employeeDao.mergeEmployees(duplicatedEmployees, mergeCleanTable, connection);
 
                 connection.close();
+
+                //Display Information
+                System.out.println("\nThere are " + employeeDuplicates.size() + " duplicated rows to be removed because their employeeID is not unique");
+                System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
+                System.out.println("A new table named " + mergeCleanTable + " has also been created where the duplicates are stored back inside with a new unique id");
             }
         }
     }

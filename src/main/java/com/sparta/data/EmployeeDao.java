@@ -7,8 +7,7 @@ import java.util.List;
 
 public class EmployeeDao implements EmployeeDaoInterface{
 
-    public EmployeeDao() {
-    }
+    public EmployeeDao() {}
 
     //Fetch employee data from tables
     @Override
@@ -35,7 +34,6 @@ public class EmployeeDao implements EmployeeDaoInterface{
 
                 employees.add(employee);
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +110,7 @@ public class EmployeeDao implements EmployeeDaoInterface{
 
                     preparedStatement.execute();
 
-                    System.out.println(employee.getFirstName() + " " + employee.getLastName() + " successfully stored in " + tableName);
+                    System.out.println(employee.getFirstName() + " " + employee.getLastName() + " has been merged in " + tableName);
             }
             connection.commit();
 
