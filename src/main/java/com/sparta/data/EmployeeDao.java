@@ -10,6 +10,7 @@ public class EmployeeDao implements EmployeeDaoInterface{
     public EmployeeDao() {
     }
 
+    //Fetch employee data from tables
     @Override
     public List<Employee> getAllEmployees(String tableName, Connection connection) {
         String selectQuery = "SELECT * FROM " + tableName;
@@ -43,20 +44,8 @@ public class EmployeeDao implements EmployeeDaoInterface{
         return employees;
     }
 
-    @Override
-    public Employee getEmployee(int employeeID) {
-        return null;
-    }
-
-    @Override
-    public void updateEmployeeID(Employee employee) {
-    }
-
-    @Override
-    public void deleteEmployee(Employee employee) {
-    }
-
     //Insert each employee in tableName
+    @Override
     public void insertEmployee(List<Employee> employees, String tableName, Connection connection) {
         String insertIntoTable = "INSERT INTO "+"csv_migration."+tableName+"(`EMP_ID`, `NAME_PREFIX`, `FIRST_NAME`, `MIDDLE_INITIAL`, `LAST_NAME`, `GENDER`, `EMAIL`, `DATE_OF_BIRTH`, `DATE_OF_JOINING`, `SALARY`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -99,6 +88,8 @@ public class EmployeeDao implements EmployeeDaoInterface{
         }
     }
 
+    //Merge duplicates
+    @Override
     public void mergeEmployees(List<Employee> employees, String tableName, Connection connection) {
         int maxID = getMaxEmployeeID(tableName, connection);
         String insertIntoTable = "INSERT INTO "+"csv_migration."+tableName+"(`EMP_ID`, `NAME_PREFIX`, `FIRST_NAME`, `MIDDLE_INITIAL`, `LAST_NAME`, `GENDER`, `EMAIL`, `DATE_OF_BIRTH`, `DATE_OF_JOINING`, `SALARY`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -128,8 +119,10 @@ public class EmployeeDao implements EmployeeDaoInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+
+    //Return max EmployeeID in tableName
+    @Override
     public int getMaxEmployeeID(String tableName, Connection connection) {
         String sqlQuery = "SELECT MAX(EMP_ID) FROM " + tableName;
 

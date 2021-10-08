@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface EmployeeDaoInterface {
     List<Employee> getAllEmployees(String tableName, Connection connection);
-    Employee getEmployee(int employeeID);
-    void updateEmployeeID(Employee employee);
-    void deleteEmployee(Employee employee);
+    void insertEmployee(List<Employee> employees, String tableName, Connection connection);
+    void mergeEmployees(List<Employee> employees, String tableName, Connection connection);
+    int getMaxEmployeeID(String tableName, Connection connection);
 }

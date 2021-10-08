@@ -61,7 +61,6 @@ public class CSVMigration {
                 employeeDao.mergeEmployees(duplicatedEmployees, mergeCleanTable, connection);
 
                 connection.close();
-
             }
         }
     }
