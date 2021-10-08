@@ -3,7 +3,7 @@ package com.sparta.data;
 import java.io.*;
 import java.util.*;
 
-public class HandleData implements Data{
+public class HandleData implements HandleDataInterface {
     FileHandler fileHandler = new FileHandler();
 
     //Read data from file and return it as a collection of Employee
