@@ -36,8 +36,6 @@ public class DatabaseController {
     public void insertEmployee(List<Employee> employees, String tableName) {
         String insertIntoTable = "INSERT INTO "+"csv_migration."+tableName+"(`EMP_ID`, `NAME_PREFIX`, `FIRST_NAME`, `MIDDLE_INITIAL`, `LAST_NAME`, `GENDER`, `EMAIL`, `DATE_OF_BIRTH`, `DATE_OF_JOINING`, `SALARY`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertIntoTable);
             connection.setAutoCommit(false);
@@ -70,8 +68,6 @@ public class DatabaseController {
                     System.out.println(employee.getFirstName() + " " + employee.getLastName() + " successfully stored in " + tableName);
 
                 }
-
-
             }
             connection.commit();
 
