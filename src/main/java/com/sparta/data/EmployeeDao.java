@@ -15,8 +15,8 @@ public class EmployeeDao implements EmployeeDaoInterface{
         String selectQuery = "SELECT * FROM " + tableName;
         List<Employee> employees = new ArrayList<>();
         try {
-            Statement preparedStatement = connection.createStatement();
-            ResultSet rs = preparedStatement.executeQuery(selectQuery);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(selectQuery);
             while (rs.next()) {
                 int id = rs.getInt("EMP_ID");
                 String namePrefix = rs.getString("NAME_PREFIX");
