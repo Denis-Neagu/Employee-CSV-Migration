@@ -80,9 +80,5 @@ public class CSVMigration {
         insertThreading.storeBatches(listOfEmployeesFromLargeCSVFile);
         long endTime = System.currentTimeMillis();
         System.out.println("time taken = " + (endTime-startTime));
-
-        //1 thread = 11630
-        //10 thread = 5620
-
     }
 }
