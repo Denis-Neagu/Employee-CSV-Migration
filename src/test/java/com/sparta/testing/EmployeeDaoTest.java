@@ -36,6 +36,17 @@ public class EmployeeDaoTest {
         assertEquals(fetchedEmployees.size(), listOfAllEmployees.size());
     }
 
+    @Test
+    public void getMaxEmployeeID_ReturnsHighestMaxEmployeeID() {
+
+        int maxID = employeeDao.getMaxEmployeeID(tableName, connection);
+        List<Employee> fetchedEmployees = employeeDao.getAllEmployees(tableName, connection);
+        Employee employee = fetchedEmployees.get(fetchedEmployees.size()-1);
+
+        assertEquals(maxID,employee.getEmployeeID());
+
+    }
+
 
 
 }
