@@ -9,8 +9,7 @@ public class HandleData implements HandleDataInterface {
 
     //Read data from file and return it as a collection of Employee
     @Override
-    public ArrayList<Employee> getUncleanDataAsEmployee() {
-        String fileName = fileHandler.getFileName();
+    public ArrayList<Employee> getDataFromCSV(String fileName) {
         String line = null;
         String[] dataArray = null;
         ArrayList<Employee> employeeList = new ArrayList<>();

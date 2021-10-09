@@ -22,7 +22,7 @@ public class CSVMigration {
 
         //Check if file given is valid
         if (fileHandler.isFileValid()) {
-            ArrayList<Employee> listOfEmployees = handleData.getUncleanDataAsEmployee(); //Get ArrayList of all data from CSV file
+            ArrayList<Employee> listOfEmployees = handleData.getDataFromCSV(fileHandler.getFileName()); //Get ArrayList of all data from CSV file
 
             if (handleData.isValid(listOfEmployees)) { //Check if all data from CSV file matches the correct regex
                 Map<Integer, List<Employee>> mapOfEmployees = handleData.mapEmployees(listOfEmployees); //Map employee per key
