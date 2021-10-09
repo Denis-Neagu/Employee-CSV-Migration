@@ -63,7 +63,12 @@ public class CSVMigration {
                 System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
                 System.out.println("A new table named " + mergeCleanTable + " has also been created where the duplicates are stored back inside with a new unique id");
 
-
+                try {
+                    System.out.println("\nProgram will continue in 15 seconds");
+                    Thread.sleep(15_000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
