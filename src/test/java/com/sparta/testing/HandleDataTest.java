@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HandleDataTest {
     HandleData handleData;
@@ -54,60 +54,72 @@ public class HandleDataTest {
 
     @Test
     public void isValid_CheckIfCorruptDataInEmployeeID() {
-        ArrayList<Employee> employeeArrayList1 = handleData.getDataFromCSV("EmployeeRecords.csv");
-        Employee employee0 = employeeArrayList1.get(0);
+        ArrayList<Employee> employeeArrayList = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Employee employee0 = employeeArrayList.get(0);
         employee0.setEmployeeID(-30);
 
-        assertFalse(handleData.isValid(employeeArrayList1));
+        assertFalse(handleData.isValid(employeeArrayList));
     }
 
     @Test
     public void isValid_CheckIfCorruptDataInEmail() {
-        ArrayList<Employee> employeeArrayList1 = handleData.getDataFromCSV("EmployeeRecords.csv");
-        Employee employee0 = employeeArrayList1.get(0);
+        ArrayList<Employee> employeeArrayList = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Employee employee0 = employeeArrayList.get(0);
         employee0.setEmail("thisisthebestemailevertobehonest");
 
-        assertFalse(handleData.isValid(employeeArrayList1));
+        assertFalse(handleData.isValid(employeeArrayList));
     }
 
     @Test
     public void isValid_CheckIfCorruptedDataInFirstName() {
-        ArrayList<Employee> employeeArrayList1 = handleData.getDataFromCSV("EmployeeRecords.csv");
-        Employee employee0 = employeeArrayList1.get(0);
+        ArrayList<Employee> employeeArrayList = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Employee employee0 = employeeArrayList.get(0);
         employee0.setFirstName("denis...");
 
-        assertFalse(handleData.isValid(employeeArrayList1));
+        assertFalse(handleData.isValid(employeeArrayList));
     }
 
     @Test
     public void isValid_CheckIfCorruptDataInLastName() {
-        ArrayList<Employee> employeeArrayList1 = handleData.getDataFromCSV("EmployeeRecords.csv");
-        Employee employee0 = employeeArrayList1.get(0);
+        ArrayList<Employee> employeeArrayList = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Employee employee0 = employeeArrayList.get(0);
         employee0.setLastName("neagu....---");
 
-        assertFalse(handleData.isValid(employeeArrayList1));
+        assertFalse(handleData.isValid(employeeArrayList));
     }
 
     @Test
     public void isValid_CheckIfCorruptDataInDateOfBirth() {
-        ArrayList<Employee> employeeArrayList1 = handleData.getDataFromCSV("EmployeeRecords.csv");
-        Employee employee0 = employeeArrayList1.get(0);
+        ArrayList<Employee> employeeArrayList = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Employee employee0 = employeeArrayList.get(0);
 
         String tempDateString = "1999-05-28";
         Date date = Date.valueOf(tempDateString);
 
         employee0.setDateOfBirth(date);
 
-        assertTrue(handleData.isValid(employeeArrayList1));
+        assertTrue(handleData.isValid(employeeArrayList));
     }
 
     @Test
     public void isValid_CheckIfCorruptDataInGender() {
-        ArrayList<Employee> employeeArrayList1 = handleData.getDataFromCSV("EmployeeRecords.csv");
-        Employee employee0 = employeeArrayList1.get(0);
+        ArrayList<Employee> employeeArrayList = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Employee employee0 = employeeArrayList.get(0);
         employee0.setGender('W');
 
-        assertFalse(handleData.isValid(employeeArrayList1));
+        assertFalse(handleData.isValid(employeeArrayList));
     }
+
+    @Test
+    public void getEmployeeData_ReturnsEmptyArrayWhenOccurrenceIsNotValid() {
+        ArrayList<Employee> employeeArrayList0 = handleData.getDataFromCSV("EmployeeRecords.csv");
+        Map<Integer, List<Employee>> mapOfEmployees = handleData.mapEmployees(employeeArrayList0);
+        List<Employee> employeeArrayList = handleData.getEmployeeData(mapOfEmployees, 5);
+
+        List<Employee> list = new ArrayList<>(); //Empty
+
+        assertEquals(list, employeeArrayList);
+    }
+
 
 }
