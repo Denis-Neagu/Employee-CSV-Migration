@@ -6,6 +6,7 @@ import com.sparta.data.FileHandler;
 import com.sparta.data.HandleData;
 import com.sparta.database.Database;
 import com.sparta.database.DatabaseController;
+import com.sparta.threading.InsertThreading;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -65,6 +66,18 @@ public class CSVMigration {
 
             }
         }
+
         //Threading Phase 3
+        databaseController.createTable("large_csv_employee_table", connection);
+        InsertThreading insertThreading = new InsertThreading();
+        List<Employee> listOfEmployeesFromLargeCSVFile = handleData.getDataFromCSV(fileHandler.getBigCSVFileName());
+        long startTime = System.currentTimeMillis();
+        insertThreading.storeBatches(listOfEmployeesFromLargeCSVFile);
+        long endTime = System.currentTimeMillis();
+        System.out.println("time taken = " + (endTime-startTime));
+
+        //1 thread = 11630
+        //10 thread = 5620
+
     }
 }

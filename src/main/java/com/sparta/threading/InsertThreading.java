@@ -4,9 +4,11 @@ import com.sparta.data.Employee;
 import com.sparta.database.Database;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class InsertThreading {
     private static final Integer BATCH_SIZE = 1000;
@@ -52,5 +54,35 @@ public class InsertThreading {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    //Store employees as a list of batches
+    public void storeBatches(List<Employee> employees) {
+        List<List<Employee>> batches = new ArrayList<>();
+
+        for (int start = 0; start < employees.size(); start += BATCH_SIZE) {
+
+            List<Employee> batch = new ArrayList<>();
+
+            for (int i = start; i < Math.min(employees.size(), start + BATCH_SIZE); i++) {
+                batch.add(employees.get(i));
+            }
+            batches.add(batch);
+        }
+
+        for (List<Employee> batch : batches) {
+            executorService.submit(() -> {
+                pushToMySql(batch, tableName);
+            });
+        }
+
+        executorService.shutdown();
+
+        try {
+            executorService.awaitTermination(10_000, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("store successful");
     }
 }
