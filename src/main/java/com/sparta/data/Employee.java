@@ -2,7 +2,7 @@ package com.sparta.data;
 
 import java.sql.Date;
 
-public class Employee implements Comparable<Employee>{
+public class Employee {
     private int employeeID;
     private String namePrefix;
     private String firstName;
@@ -125,11 +125,15 @@ public class Employee implements Comparable<Employee>{
     }
 
     @Override
-    public int compareTo(Employee o) {
-        if (this.employeeID > o.getEmployeeID()) {
-           return 1;
-        } else {
-            return -1;
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
         }
+        if(obj == this) {
+            return true;
+        }
+        Employee e = (Employee) obj;
+
+        return (this.getEmployeeID() == e.getEmployeeID());
     }
 }

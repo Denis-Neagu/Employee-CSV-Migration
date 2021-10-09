@@ -7,7 +7,7 @@ public class FileHandler {
 
     final private String bigCSVFileName= "EmployeeRecordsLarge.csv";
 
-    public boolean isFileValid() {
+    public boolean isFileValid(String fileName) {
         File file = new File(fileName);
         if (file.isFile() && file.exists() && file.canRead()) {
             return true;

@@ -25,7 +25,7 @@ public class CSVMigration {
         Connection connection = (new Database()).getConnection();
 
         //Check if file given is valid
-        if (fileHandler.isFileValid()) {
+        if (fileHandler.isFileValid(fileHandler.getFileName())) {
             ArrayList<Employee> listOfEmployees = handleData.getDataFromCSV(fileHandler.getFileName()); //Get ArrayList of all data from CSV file
 
             if (handleData.isValid(listOfEmployees)) { //Check if all data from CSV file matches the correct regex
@@ -80,9 +80,5 @@ public class CSVMigration {
         insertThreading.storeBatches(listOfEmployeesFromLargeCSVFile);
         long endTime = System.currentTimeMillis();
         System.out.println("time taken = " + (endTime-startTime));
-
-        //1 thread = 11630
-        //10 thread = 5620
-
     }
 }
