@@ -19,6 +19,9 @@ public class CSVMigration {
         HandleData handleData = new HandleData();
         FileHandler fileHandler = new FileHandler();
         EmployeeDao employeeDao = new EmployeeDao();
+        DatabaseController databaseController = new DatabaseController();
+        //Establish Connection
+        Connection connection = (new Database()).getConnection();
 
         //Check if file given is valid
         if (fileHandler.isFileValid()) {
@@ -35,11 +38,7 @@ public class CSVMigration {
                 String employeeCleanDataTable = "employee_clean_data";
                 String mergeCleanTable = "merged_clean_table";
 
-                //Establish Connection
-                Connection connection = Database.getConnection();
-
                 //Create Table
-                DatabaseController databaseController = new DatabaseController();
                 databaseController.createTable(employeeDuplicateTable, connection);
                 databaseController.createTable(employeeCleanDataTable, connection);
                 databaseController.createTable(mergeCleanTable, connection);
@@ -57,13 +56,15 @@ public class CSVMigration {
 
                 employeeDao.mergeEmployees(duplicatedEmployees, mergeCleanTable, connection);
 
-                connection.close();
 
                 //Display Information
                 System.out.println("\nThere are " + employeeDuplicates.size() + " duplicated rows to be removed because their employeeID is not unique");
                 System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
                 System.out.println("A new table named " + mergeCleanTable + " has also been created where the duplicates are stored back inside with a new unique id");
+
+
             }
         }
+        //Threading Phase 3
     }
 }

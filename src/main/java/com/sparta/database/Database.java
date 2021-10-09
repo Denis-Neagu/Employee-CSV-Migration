@@ -5,27 +5,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private static Database instance;
-    private static Connection connection;
+    String dbURL = "jdbc:mysql://localhost:3306/csv_migration?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    String dbUsername = "root";
+    String dbPassword = "rootpassword";
 
-    private Database() {
-        String dbURL = "jdbc:mysql://localhost:3306/csv_migration?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        String dbUsername = "root";
-        String dbPassword = "rootpassword";
-
-        try {
-            connection = DriverManager.getConnection(dbURL,dbUsername,dbPassword);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public Database() {
     }
 
-    public static Connection getConnection() {
-        if (instance == null) {
-            instance = new Database();
+    public Connection getConnection() {
+        try {
+            return DriverManager.getConnection(dbURL,dbUsername,dbPassword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return connection;
     }
 
 
