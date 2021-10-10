@@ -72,6 +72,9 @@ public class CSVMigration {
             }
         }
 
+        //Truncates data before storing
+        employeeDao.truncateData("large_csv_employee_table", connection);
+
         //Threading
         databaseController.createTable("large_csv_employee_table", connection);
         InsertThreading insertThreading = new InsertThreading();
@@ -79,6 +82,6 @@ public class CSVMigration {
         long startTime = System.currentTimeMillis();
         insertThreading.storeBatches(listOfEmployeesFromLargeCSVFile);
         long endTime = System.currentTimeMillis();
-        System.out.println("time taken = " + (endTime-startTime));
+        System.out.println("time taken = " + (endTime-startTime) + "= ms");
     }
 }

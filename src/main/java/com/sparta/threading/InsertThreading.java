@@ -17,7 +17,7 @@ public class InsertThreading {
     String tableName = "large_csv_employee_table";
 
     public InsertThreading() {
-        this.executorService = Executors.newFixedThreadPool(10);
+        this.executorService = Executors.newFixedThreadPool(10); //Change thread pool count as required
         this.database = new Database();
     }
 

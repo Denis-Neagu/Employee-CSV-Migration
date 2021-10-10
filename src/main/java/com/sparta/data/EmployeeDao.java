@@ -133,4 +133,16 @@ public class EmployeeDao implements EmployeeDaoInterface{
         }
         return 0;
     }
+
+    public void truncateData(String tableName, Connection connection) {
+        String truncateDataSQL = "TRUNCATE " + tableName;
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(truncateDataSQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
