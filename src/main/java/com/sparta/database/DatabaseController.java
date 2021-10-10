@@ -1,9 +1,6 @@
 package com.sparta.database;
 
-import com.sparta.data.Employee;
-
 import java.sql.*;
-import java.util.List;
 
 public class DatabaseController {
 
