@@ -134,6 +134,7 @@ public class EmployeeDao implements EmployeeDaoInterface{
         return 0;
     }
 
+    @Override
     public void truncateData(String tableName, Connection connection) {
         String truncateDataSQL = "TRUNCATE " + tableName;
 
@@ -144,5 +145,19 @@ public class EmployeeDao implements EmployeeDaoInterface{
             e.printStackTrace();
         }
 
+    }
+
+    //Update employee in table
+    @Override
+    public void updateEmployeeEmail(String tableName, Connection connection, String newEmail, int empId) {
+        String updateEmployeeSQL = "UPDATE " + tableName + " SET EMAIL = ? WHERE EMP_ID =" + empId;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(updateEmployeeSQL);
+            ps.setString(1, newEmail);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

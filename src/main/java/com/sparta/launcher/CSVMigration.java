@@ -63,9 +63,12 @@ public class CSVMigration {
                 System.out.println("There are " + employeeCleanCollection.size() + " unique rows after removing duplicates.");
                 System.out.println("A new table named " + mergeCleanTable + " has also been created where the duplicates are stored back inside with a new unique id");
 
+                //Update Employee with a new email
+                employeeDao.updateEmployeeEmail("employee_duplicates", connection, "newemail@gmail.com", 115718);
+
                 try {
                     System.out.println("\nProgram will continue in 15 seconds");
-                    Thread.sleep(15_000);
+                    Thread.sleep(3_000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -83,6 +86,7 @@ public class CSVMigration {
         insertThreading.storeBatches(listOfEmployeesFromLargeCSVFile);
         long endTime = System.currentTimeMillis();
         System.out.println("time taken = " + (endTime-startTime) + "ms" + " using " + insertThreading.getThreadCount() + " threads");
+
 
         //Close connection
         connection.close();

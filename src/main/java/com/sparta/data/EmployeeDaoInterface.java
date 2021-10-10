@@ -9,4 +9,5 @@ public interface EmployeeDaoInterface {
     void mergeEmployees(List<Employee> employees, String tableName, Connection connection);
     int getMaxEmployeeID(String tableName, Connection connection);
     void truncateData(String tableName, Connection connection);
+    void updateEmployeeEmail(String tableName, Connection connection, String newEmail, int empId);
 }
