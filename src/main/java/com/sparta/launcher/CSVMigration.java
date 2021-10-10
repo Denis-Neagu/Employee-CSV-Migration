@@ -67,7 +67,7 @@ public class CSVMigration {
                 employeeDao.updateEmployeeEmail("employee_duplicates", connection, "newemail@gmail.com", 115718);
 
                 //Fetch an Employee from table
-                Employee employeeFetched = employeeDao.fetchSpecificUser("employee_duplicates", connection, 115718);
+                Employee employeeFetched = employeeDao.fetchEmployee("employee_duplicates", connection, 115718);
                 System.out.println("\nYour fetched employee is");
                 System.out.println(employeeFetched);
 
