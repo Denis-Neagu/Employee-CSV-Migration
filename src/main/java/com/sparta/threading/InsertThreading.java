@@ -12,12 +12,13 @@ import java.util.concurrent.TimeUnit;
 
 public class InsertThreading {
     private static final Integer BATCH_SIZE = 1000;
+    private static final int threadCount = 1;
     private final ExecutorService executorService;
     private final Database database;
     String tableName = "large_csv_employee_table";
 
     public InsertThreading() {
-        this.executorService = Executors.newFixedThreadPool(10); //Change thread pool count as required
+        this.executorService = Executors.newFixedThreadPool(threadCount); //Change thread pool count as required
         this.database = new Database();
     }
 
@@ -84,5 +85,9 @@ public class InsertThreading {
             e.printStackTrace();
         }
         System.out.println("store successful");
+    }
+
+    public int getThreadCount() {
+        return threadCount;
     }
 }

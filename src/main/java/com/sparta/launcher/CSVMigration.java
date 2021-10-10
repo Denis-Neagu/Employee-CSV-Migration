@@ -82,6 +82,6 @@ public class CSVMigration {
         long startTime = System.currentTimeMillis();
         insertThreading.storeBatches(listOfEmployeesFromLargeCSVFile);
         long endTime = System.currentTimeMillis();
-        System.out.println("time taken = " + (endTime-startTime) + "= ms");
+        System.out.println("time taken = " + (endTime-startTime) + "ms" + " using " + insertThreading.getThreadCount() + " threads");
     }
 }
