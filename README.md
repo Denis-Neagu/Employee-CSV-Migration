@@ -10,6 +10,7 @@
 
 - [x] Reading data from CSV File
 - [x] Storing data from CSV File in a collection of Employees
+- [x] Successfully migrated data to a relational database
 - [x] Validation checks
 - [x] SOLID Principles
 - [x] Cleaned the data from duplicates
@@ -17,6 +18,7 @@
 - [x] Carried out multithreading using ExecutorService
 - [x] Exception Handling
 - [x] Observations on multithreading
+- [x] Usage of lambdas
 
 
 #### Observations
