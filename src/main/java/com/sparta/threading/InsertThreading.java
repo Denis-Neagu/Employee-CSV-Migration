@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class InsertThreading {
     private static final Integer BATCH_SIZE = 1000;
-    private static final int threadCount = 1;
+    private static final int threadCount = 10;
     private final ExecutorService executorService;
     private final Database database;
     String tableName = "large_csv_employee_table";

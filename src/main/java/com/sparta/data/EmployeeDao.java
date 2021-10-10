@@ -134,6 +134,7 @@ public class EmployeeDao implements EmployeeDaoInterface{
         return 0;
     }
 
+    @Override
     public void truncateData(String tableName, Connection connection) {
         String truncateDataSQL = "TRUNCATE " + tableName;
 
@@ -144,5 +145,50 @@ public class EmployeeDao implements EmployeeDaoInterface{
             e.printStackTrace();
         }
 
+    }
+
+    //Update employee in table
+    @Override
+    public void updateEmployeeEmail(String tableName, Connection connection, String newEmail, int empId) {
+        String updateEmployeeSQL = "UPDATE " + tableName + " SET EMAIL = ? WHERE EMP_ID =" + empId;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(updateEmployeeSQL);
+            ps.setString(1, newEmail);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Fetch an employee
+    @Override
+    public Employee fetchSpecificUser(String tableName, Connection connection, int empId) {
+        String fetchEmployee = "SELECT * FROM " + tableName + " WHERE EMP_ID="+empId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(fetchEmployee);
+            while(rs.next()) {
+                int id = rs.getInt("EMP_ID");
+                String namePrefix = rs.getString("NAME_PREFIX");
+                String firstName = rs.getString("FIRST_NAME");
+                String middleInitial = rs.getString("MIDDLE_INITIAL");
+                String lastName = rs.getString("LAST_NAME");
+                String gender = rs.getString("GENDER");
+                String email = rs.getString("EMAIL");
+                Date dateOfBirth = rs.getDate("DATE_OF_BIRTH");
+                Date dateOfJoining = rs.getDate("DATE_OF_JOINING");
+                double salary = rs.getDouble("SALARY");
+
+                Employee employee = new Employee(id, namePrefix, firstName, middleInitial.charAt(0),
+                        lastName, gender.charAt(0), email, dateOfBirth, dateOfJoining, salary);
+
+                return employee;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
