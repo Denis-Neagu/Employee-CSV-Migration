@@ -163,7 +163,7 @@ public class EmployeeDao implements EmployeeDaoInterface{
 
     //Fetch an employee
     @Override
-    public Employee fetchSpecificUser(String tableName, Connection connection, int empId) {
+    public Employee fetchEmployee(String tableName, Connection connection, int empId) {
         String fetchEmployee = "SELECT * FROM " + tableName + " WHERE EMP_ID="+empId;
         try {
             Statement statement = connection.createStatement();
