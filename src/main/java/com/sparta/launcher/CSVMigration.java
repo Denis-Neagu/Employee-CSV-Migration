@@ -72,7 +72,7 @@ public class CSVMigration {
             }
         }
 
-        //Threading Phase 3
+        //Threading
         databaseController.createTable("large_csv_employee_table", connection);
         InsertThreading insertThreading = new InsertThreading();
         List<Employee> listOfEmployeesFromLargeCSVFile = handleData.getDataFromCSV(fileHandler.getBigCSVFileName());

@@ -114,4 +114,9 @@ public class HandleData implements HandleDataInterface {
         }
         return valid;
     }
+
+    @Override
+    public void printEmployees(List<Employee> employees) {
+        employees.forEach(employee -> System.out.println(employee));
+    }
 }

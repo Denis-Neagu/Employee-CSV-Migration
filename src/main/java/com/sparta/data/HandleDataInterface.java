@@ -8,4 +8,5 @@ public interface HandleDataInterface {
     Map<Integer, List<Employee>> mapEmployees(List<Employee> listOfEmployees);
     List<Employee> getEmployeeData(Map<Integer,List<Employee>> mapOfEmployees, int occurrence);
     boolean isValid(List<Employee> employees);
+    void printEmployees(List<Employee> employees);
 }
