@@ -21,6 +21,9 @@ public class CSVMigration {
         FileHandler fileHandler = new FileHandler();
         EmployeeDao employeeDao = new EmployeeDao();
         DatabaseController databaseController = new DatabaseController();
+        //Create database
+        databaseController.createDatabase();
+
         //Establish Connection
         Connection connection = (new Database()).getConnection();
 
