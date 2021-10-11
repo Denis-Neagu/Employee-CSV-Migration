@@ -28,4 +28,17 @@ public class DatabaseController {
             e.printStackTrace();
         }
     }
+
+    public void createDatabase() throws SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "rootpassword");
+
+        String createDatabaseQueries = "CREATE DATABASE IF NOT EXISTS csv_migration";
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(createDatabaseQueries);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
